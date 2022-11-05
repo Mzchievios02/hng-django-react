@@ -2,32 +2,11 @@ version: "3.2"
 services:
   api:
     restart: always
-    container_name: backend
-    command : bash -c python manage.py runserver
-    build:
-      context: ./api/
-      dockerfile: Dockerfile
-    ports:
-      - "8000:8000"
-    networks:
-      - db-net
+    image: mzchievous/api-hng
 
   frontend:
-    restart: always
-    command : npm start
-    container_name: frontend
-    build:
-      context: ./frontend/
-      dockerfile: Dockerfile
+    image: mzchievous/frontend-hng
     ports:
       - "3000:3000"
-    stdin_open: true
     depends_on:
       - api
-    networks:
-      - db-net
-
-networks:
-  db-net:
-    driver: bridge
-  
